@@ -3,7 +3,7 @@
 #include "Engine.hpp"
 
 int main() {
-    auto engine = std::make_shared<Engine>(352, 352, "battleship");
+    auto engine = std::make_shared<Engine>(896, 710, "battleship");
     engine->set_icon("..\\..\\src\\image\\icon.png");
     engine->run();
 

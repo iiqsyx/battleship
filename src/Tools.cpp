@@ -52,27 +52,22 @@ void Tool_cell::set_sprite(int x_pos, int y_pos) {
 
 bool Tool_cell::pressed(sf::Event & evt, sf::Vector2f pos) {
     if (press) {
-	    return false;
-    }
+		return false;
+	}
 
-    if (cell.getGlobalBounds().contains(pos.x,pos.y) && evt.type == sf::Event::MouseButtonPressed && !press) {
-	    if (evt.key.code == sf::Mouse::Left) {
-		    press = true;
-		    return true;
-	    }
-    }
-
-    if (!press) {
-	    return false;
-    }
-
-    if (press) {
-	    if (!(evt.type == sf::Event::MouseButtonPressed)) {
-		    press = false;
-	    }
-
-	    return false;
-    }
+	if (cell.getGlobalBounds().contains(pos.x, pos.y) && evt.type == sf::Event::MouseButtonPressed && !press) {
+		if (evt.key.code == sf::Mouse::Left) {
+			press = true;
+			return true;
+		}
+	}
+    
+	if (press) {
+		if (!(evt.key.code == sf::Mouse::Left)) {
+			press = false;
+		}
+		return false;
+	}
 }
 
 void Tool_cell::draw(std::unique_ptr<sf::RenderWindow>& window) {

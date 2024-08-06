@@ -14,8 +14,9 @@ private:
 
 private:
    std::unique_ptr<sf::RenderWindow> window;
-   sf::RectangleShape background = sf::RectangleShape(sf::Vector2f(352, 352));
+   sf::RectangleShape background = sf::RectangleShape(sf::Vector2f(896, 710));
    Player_field* player_field;
+   Enemy_field* enemy_field;
 };
 
 

@@ -6,7 +6,7 @@ class Field {
 public:
     Field();
     virtual ~Field();
-    
+
 protected:
     Tool_cell ** cells;
     Tool_text* letters;
@@ -28,9 +28,13 @@ private:
 
 class Player_field : private Field {
 public:
-    Player_field() : Field(){ };
+    Player_field() : Field(){ }
 
+    Tool_cell& get_position(int x, int y) {
+        return cells[x][y];
+    }
     void draw_field(std::unique_ptr<sf::RenderWindow>& window);
+
 private:
     void draw_letters(std::unique_ptr<sf::RenderWindow>& window) override;
     void draw_nums(std::unique_ptr<sf::RenderWindow>& window) override;
@@ -38,7 +42,18 @@ private:
 };
 
 class Enemy_field : public Field {
+public:
+    Enemy_field() : Field(){ }
 
+    Tool_cell& get_position(int x, int y) {
+        return cells[x][y];
+    }
+    void draw_field(std::unique_ptr<sf::RenderWindow>& window);
+
+private:
+    void draw_letters(std::unique_ptr<sf::RenderWindow>& window) override;
+    void draw_nums(std::unique_ptr<sf::RenderWindow>& window) override;
+    void draw_cells(std::unique_ptr<sf::RenderWindow>& window) override;
 };
 
 
