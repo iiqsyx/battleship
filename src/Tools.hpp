@@ -55,18 +55,21 @@ private:
 
 class Tool_cell : public Tool {
 public:
+    Tool_cell(): press(false) {};
     Tool_cell(sf::String path_to_image, float wight, float hight) : wight(wight), hight(hight) {
         press = false;
-        cell.setSize(sf::Vector2f(32, 32));
+        cell.setSize(sf::Vector2f(this->wight, this->hight));
         
         image.init_tool(path_to_image);
         cell.setTexture(&image.get_texture());
         cell.setTextureRect(sf::IntRect(0, 0, 32, 32));
     };
 
+    
     void set_position(float x, float y) override;
     void set_size(float wight, float hight);
-    void change_sprite(int x_pos, int y_pos);
+    void set_sprite(int x_pos, int y_pos);
+    void set_image(sf::String path_to_image);
     void draw(std::unique_ptr<sf::RenderWindow>& window) override;
 
     bool pressed(sf::Event & evt, sf::Vector2f pos);

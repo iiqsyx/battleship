@@ -4,23 +4,37 @@
 
 class Field {
 public:
-    Field(/* args */);
+    Field();
     virtual ~Field();
+    
+protected:
+    Tool_cell ** cells;
+    Tool_text* letters;
+    Tool_text* nums;
+
+    const sf::String str_letters = "ABCDEFGHIJ";
+    const sf::String str_nums = "12345678910";
 
 private: 
-    void draw_letters(std::unique_ptr<sf::RenderWindow>& window);
-    void draw_nums(std::unique_ptr<sf::RenderWindow>& window);
-    void draw_cells(std::unique_ptr<sf::RenderWindow>& window);
+    virtual void draw_letters(std::unique_ptr<sf::RenderWindow>& window) = 0;
+    virtual void draw_nums(std::unique_ptr<sf::RenderWindow>& window) = 0;
+    virtual void draw_cells(std::unique_ptr<sf::RenderWindow>& window) = 0;
 
     void set_letters();
     void set_nums();
     void set_cells();
 
-    
 };
 
-class Player_Field : public Field {
+class Player_field : private Field {
+public:
+    Player_field() : Field(){ };
 
+    void draw_field(std::unique_ptr<sf::RenderWindow>& window);
+private:
+    void draw_letters(std::unique_ptr<sf::RenderWindow>& window) override;
+    void draw_nums(std::unique_ptr<sf::RenderWindow>& window) override;
+    void draw_cells(std::unique_ptr<sf::RenderWindow>& window) override;
 };
 
 class Enemy_field : public Field {

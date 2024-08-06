@@ -41,9 +41,13 @@ void Tool_cell::set_size(float wight, float hight) {
     cell.setSize(sf::Vector2f(this->wight, this->hight));
 }
 
-void Tool_cell::change_sprite(int x_pos, int y_pos) {
+void Tool_cell::set_image(sf::String path_to_image) {
+    image.init_tool(path_to_image);
+}
+
+void Tool_cell::set_sprite(int x_pos, int y_pos) {
     cell.setTexture(&image.get_texture());
-    cell.setTextureRect(sf::IntRect(x_pos, y_pos, 0, 0));
+    cell.setTextureRect(sf::IntRect(x_pos, y_pos, 32, 32));
 }
 
 bool Tool_cell::pressed(sf::Event & evt, sf::Vector2f pos) {

@@ -2,6 +2,8 @@
 
 Engine::Engine(unsigned int x_size, unsigned int y_size, const std::string &lable){
     window = std::make_unique<sf::RenderWindow>(sf::VideoMode(x_size, y_size), lable);
+    player_field = new Player_field;
+
 }
 
 void Engine::set_icon(const std::string& path_to_file) {
@@ -31,6 +33,6 @@ void Engine::input(){
 void Engine::draw(){
     window->clear();
     window->draw(background);
-
+    player_field->draw_field(window);
     window->display();
 }

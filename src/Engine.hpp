@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include <memory>
+#include "Fields.hpp"
 
 class Engine {
 public:
@@ -14,6 +15,7 @@ private:
 private:
    std::unique_ptr<sf::RenderWindow> window;
    sf::RectangleShape background = sf::RectangleShape(sf::Vector2f(352, 352));
+   Player_field* player_field;
 };
 
 
