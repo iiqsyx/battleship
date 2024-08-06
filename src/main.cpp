@@ -1,10 +1,11 @@
 #include <SFML/Graphics.hpp>
+#include <memory>
 #include "Engine.hpp"
 
 int main() {
-    Engine* engine = new Engine(352,352, "App");
+    auto engine = std::make_shared<Engine>(352, 352, "battleship");
+    engine->set_icon("..\\..\\src\\image\\icon.png");
     engine->run();
 
-    delete engine;
     return 0;
 }

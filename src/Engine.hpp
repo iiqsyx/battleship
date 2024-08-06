@@ -1,9 +1,10 @@
 #include <SFML/Graphics.hpp>
 #include <memory>
+
 class Engine {
 public:
     Engine(unsigned int x_size, unsigned int y_size, const std::string &lable);
-
+    void set_icon(const std::string& path_to_file);
     void run();
 
 private:
