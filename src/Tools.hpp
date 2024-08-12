@@ -71,7 +71,8 @@ public:
     void set_sprite(int x_pos, int y_pos);
     void set_image(sf::String path_to_image);
     void draw(std::unique_ptr<sf::RenderWindow>& window) override;
-
+    void reset_pressed();
+    
     bool pressed(sf::Event & evt, sf::Vector2f pos);
 
 private:
@@ -83,4 +84,35 @@ private:
 
 };
 
+class Tool_button : public Tool {
+public:
+    Tool_button(): press(false) {};
+    Tool_button (sf::String path_to_image, float wight, float hight) : wight(wight), hight(hight) {
+        press = false;
+        button.setSize(sf::Vector2f(this->wight, this->hight));
+        
+        image.init_tool(path_to_image);
+        button.setTexture(&image.get_texture());
+        button.setTextureRect(sf::IntRect(0, 0, 32, 32));
+    };
 
+    void set_sprite(int x_pos, int y_pos);
+    void set_position(float x, float y) override;
+    void set_size(float wight, float hight);
+    void set_image(sf::String path_to_image);
+    void draw(std::unique_ptr<sf::RenderWindow>& window) override;
+
+    bool pressed(sf::Event & evt, sf::Vector2f pos);
+
+private:
+    void set_pressed_sprite();
+    void set_original_sprite();
+
+    Tool_image image;
+    sf::RectangleShape button;
+    float wight;
+    float hight;
+    bool press;
+    float sprite_x;
+    float sprite_y;
+};

@@ -70,6 +70,69 @@ bool Tool_cell::pressed(sf::Event & evt, sf::Vector2f pos) {
 	}
 }
 
+void Tool_cell::reset_pressed() {
+    press = false;
+}
+
 void Tool_cell::draw(std::unique_ptr<sf::RenderWindow>& window) {
     window->draw(cell);
+}
+
+//////////////////////////////////////////////////////////
+// BUTTON TOOL --------------------------------------------------------
+void Tool_button::set_sprite(int x_pos, int y_pos) {
+    sprite_x = x_pos;
+    sprite_y = y_pos;
+    button.setTexture(&image.get_texture());
+    button.setTextureRect(sf::IntRect(x_pos, y_pos, 32, 32));
+}
+
+void Tool_button::set_position(float x, float y) {
+    button.setPosition(x, y);
+}
+
+void Tool_button::set_size(float wight, float hight) {
+    this->wight = wight;
+    this->hight = hight;
+
+    button.setSize(sf::Vector2f(this->wight, this->hight));
+}
+
+void Tool_button::set_image(sf::String path_to_image) {
+    image.init_tool(path_to_image);
+}
+
+void Tool_button::set_pressed_sprite() {
+    button.setTexture(&image.get_texture());
+    button.setTextureRect(sf::IntRect(sprite_x + 32, sprite_y, 32, 32));
+}
+
+void Tool_button::set_original_sprite() {
+    button.setTexture(&image.get_texture());
+    button.setTextureRect(sf::IntRect(sprite_x, sprite_y, 32, 32));
+}
+
+bool Tool_button::pressed(sf::Event & evt, sf::Vector2f pos) {
+
+    if (button.getGlobalBounds().contains(pos.x, pos.y)) {
+        set_pressed_sprite();
+    }
+
+    if (!(button.getGlobalBounds().contains(pos.x, pos.y))) {
+        set_original_sprite();
+    }
+
+	if (button.getGlobalBounds().contains(pos.x, pos.y) && evt.type == sf::Event::MouseButtonPressed && !press) {
+		if (evt.key.code == sf::Mouse::Left) {
+
+            set_original_sprite();
+			return true;
+		}
+	}
+
+    return false;
+}
+
+void Tool_button::draw(std::unique_ptr<sf::RenderWindow>& window) {
+    window->draw(button);
 }

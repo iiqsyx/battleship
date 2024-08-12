@@ -14,9 +14,11 @@ private:
 
 private:
    std::unique_ptr<sf::RenderWindow> window;
-   sf::RectangleShape background = sf::RectangleShape(sf::Vector2f(896, 710));
+   sf::RectangleShape background = sf::RectangleShape(sf::Vector2f(896, 480));
+   
    Player_field* player_field;
    Enemy_field* enemy_field;
+   Tool_button* replace_ships_button;
 };
 
 
